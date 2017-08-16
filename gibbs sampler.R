@@ -1,8 +1,7 @@
-gibbs.approx=function(dat=dat,ngibbs=ngibbs){
+gibbs.approx=function(dat=dat,nomes.cov=nomes.cov,ngibbs=ngibbs){
   
 nobs=nrow(dat)
-ind=which(colnames(dat)%in%c('microsc1','loc.id'))
-xmat.orig=cov=data.matrix(dat[,-ind])
+xmat.orig=cov=data.matrix(cbind(1,dat[,nomes.cov]))
 maxp=ncol(cov)
 
 #initial values
