@@ -1,4 +1,4 @@
-gibbs.approx=function(dat=dat,nomes.cov=nomes.cov,ngibbs=ngibbs){
+gibbs.approx=function(dat,nomes.cov,ngibbs){
   
 nobs=nrow(dat)
 xmat.orig=cov=data.matrix(cbind(1,dat[,nomes.cov]))
@@ -15,9 +15,9 @@ cov=cov[,indin]
 lambda=0.1
 
 #prior
-a.lamb=0.999; b.lamb=0.00999
+# a.lamb=0.999; b.lamb=0.00999
 # a.lamb=2.349; b.lamb=0.2349
-# a.lamb=0.1; b.lamb=0.1
+a.lamb=1; b.lamb=1
 
 ngibbs=10000
 vec.betas=matrix(NA,ngibbs,maxp)
