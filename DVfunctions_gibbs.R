@@ -135,14 +135,13 @@ samp.move=function(indin,indout,maxp,cov,z,lambda,xmat.orig){
 }
 #------------------------------------------
 death=function(indinz){
-  if (length(indinz)==3) return(indinz[3]) #cannot delete intercept OR rainy season
-  k=sample(3:length(indinz),size=1) 
+  k=sample(2:length(indinz),size=1) 
   indinz[-k]
 }
 #---------------------------------------------------------------------------------------------------
 swap=function(indinz,indoutz){
-  if (length(indinz)==3) k=indinz[3] #cannot swap intercept OR rainy season
-  if (length(indinz)!=3) k=sample(3:length(indinz),size=1)  
+  if (length(indinz)==2) k=indinz[2] #cannot swap intercept
+  if (length(indinz)!=2) k=sample(2:length(indinz),size=1)  
   tmp=indinz[-k]
   include=sample(indoutz,size=1)
   sort(c(tmp,include))
