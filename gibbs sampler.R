@@ -3,6 +3,7 @@ gibbs.approx=function(dat,nomes.cov,ngibbs){
 nobs=nrow(dat)
 xmat.orig=cov=data.matrix(cbind(1,dat[,nomes.cov]))
 maxp=ncol(cov)
+# maxp=50
 
 #initial values
 betas=c(0.2,rep(0,maxp-1))
@@ -19,12 +20,15 @@ lambda=0.1
 # a.lamb=2.349; b.lamb=0.2349
 a.lamb=1; b.lamb=1
 
-ngibbs=10000
 vec.betas=matrix(NA,ngibbs,maxp)
 vec.outros=matrix(NA,ngibbs,1)
 
 for (i in 1:ngibbs){
   print(c(i,indin))
+  title=paste("Gibbs Iterations ", t, sep = "")
+  if (!exists("pb")) pb <- tkProgressBar(title, min = 1, max = iter)
+  setTkProgressBar(pb, i)
+  
   if (!1%in%indin) break;
   tmp=samp.move(indin=indin,indout=indout,maxp=maxp,cov=cov,z=z,
                 lambda=lambda,xmat.orig=xmat.orig)
@@ -42,6 +46,7 @@ for (i in 1:ngibbs){
   vec.betas[i,]=tmp
   vec.outros[i]=lambda
 }
+close(pb)
 
 list(betas=vec.betas,lambda=vec.outros)
 # seq1=500:(i-1)
